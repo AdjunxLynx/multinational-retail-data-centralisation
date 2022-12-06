@@ -1,0 +1,18 @@
+2022-12-06 18:52:54.390 GMT [17292] LOG:  starting PostgreSQL 15.1, compiled by Visual C++ build 1914, 64-bit
+2022-12-06 18:52:54.393 GMT [17292] LOG:  could not bind IPv6 address "::1": Permission denied
+2022-12-06 18:52:54.393 GMT [17292] LOG:  could not bind IPv4 address "127.0.0.1": Permission denied
+2022-12-06 18:52:54.393 GMT [17292] WARNING:  could not create listen socket for "localhost"
+2022-12-06 18:52:54.393 GMT [17292] FATAL:  could not create any TCP/IP sockets
+2022-12-06 18:52:54.395 GMT [17292] LOG:  database system is shut down
+2022-12-06 19:21:51.900 GMT [19560] LOG:  starting PostgreSQL 15.1, compiled by Visual C++ build 1914, 64-bit
+2022-12-06 19:21:51.903 GMT [19560] LOG:  could not bind IPv6 address "::1": Permission denied
+2022-12-06 19:21:51.903 GMT [19560] LOG:  could not bind IPv4 address "127.0.0.1": Permission denied
+2022-12-06 19:21:51.903 GMT [19560] WARNING:  could not create listen socket for "localhost"
+2022-12-06 19:21:51.903 GMT [19560] FATAL:  could not create any TCP/IP sockets
+2022-12-06 19:21:51.905 GMT [19560] LOG:  database system is shut down
+2022-12-06 19:27:04.994 GMT [22236] LOG:  starting PostgreSQL 15.1, compiled by Visual C++ build 1914, 64-bit
+2022-12-06 19:27:04.997 GMT [22236] LOG:  could not bind IPv6 address "::1": Permission denied
+2022-12-06 19:27:04.997 GMT [22236] LOG:  could not bind IPv4 address "127.0.0.1": Permission denied
+2022-12-06 19:27:04.997 GMT [22236] WARNING:  could not create listen socket for "localhost"
+2022-12-06 19:27:04.997 GMT [22236] FATAL:  could not create any TCP/IP sockets
+2022-12-06 19:27:04.998 GMT [22236] LOG:  database system is shut down
