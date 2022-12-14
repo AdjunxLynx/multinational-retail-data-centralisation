@@ -22,17 +22,10 @@ class DataExtractor():
         return result, result.keys()
 
     def extract_rds_table(self, engine, table_name):
-        pass
         column = self.read_table_data(table_name, engine)[1]
         df = pd.DataFrame(self.read_table_data(table_name, engine)[0], columns = column)
-        print(df)
         return df
         
         
-    def run(self, engine):
-        for i in self.list_db_tables(engine):
-            self.extract_rds_table(engine, i)
-        pass
-a =DataExtractor()
-DBC = DBC()
-a.run(DBC.init_db_engine())
+
+
