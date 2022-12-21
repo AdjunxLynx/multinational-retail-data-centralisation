@@ -1,9 +1,10 @@
 from database_utils import DatabaseConnector as DBC
-
 import sqlalchemy
 from sqlalchemy import inspect, text
 from sqlalchemy.ext.declarative import declarative_base
 import pandas as pd
+import tabula
+
 class DataExtractor():
     def list_db_tables(self, engine):
         inspector = inspect(engine)
@@ -13,7 +14,7 @@ class DataExtractor():
         for schema in schemas:
             for table_name in inspector.get_table_names("public"):
                 tables.append(table_name)
-        print(tables)
+        #print(tables)
         return tables
     
     def read_table_data(self, table_name, engine):
@@ -22,9 +23,18 @@ class DataExtractor():
         return result, result.keys()
 
     def extract_rds_table(self, engine, table_name):
+        pd.set_option('display.max_columns', 10)
+        table_name = self.list_db_tables(engine)[1]
         column = self.read_table_data(table_name, engine)[1]
         df = pd.DataFrame(self.read_table_data(table_name, engine)[0], columns = column)
+        df.set_index("index")
         return df
+    
+    def retrieve_pdf_data(self, link):
+        df = tabula.read_pdf(link, pages = "all")
+        
+        pass
+       
         
         
 
