@@ -145,13 +145,16 @@ class DataClean():
         return address
     
     def clean_card_data(self, df):
-        print(df)
-      #  for index, row in df.iterrows():
+        df.set_index(df[0], inplace=True)
+        for i in df:
+            i.set_index(i[0])
+            for index, row in i.iterrows():
+                card_number = row[1]
+                expiry_date = row[2]
+                card_provider = row[3]
+                date_payment_confirmed = row[4]
+           
             
-         #   numbers = re.search(r'\d', row["card_provider"])
-           # if len(row["card_provider"]) == numbers:
-               # print(row["card_provider"])
-                #print(numbers)
                 
         
 
@@ -159,7 +162,7 @@ class DataClean():
 DC = DataClean()
 
 DE = DataExtractor()
-DC.clean_card_data(DE.retrieve_pdf_data("card_details.pdf"))
+DC.clean_card_data(DE.retrieve_pdf_data("https://data-handling-public.s3.eu-west-1.amazonaws.com/card_details.pdf"))
 while True:
     pass
 
