@@ -53,18 +53,24 @@ class DataExtractor():
                     pass
                 else:
                     temp.append(col)
-            temp = pd.DataFrame(temp)
+            if len(temp) == 0:
+                temp = name
+            print(df.columns)
+            print(temp)
+
+            temp_df = pd.DataFrame([temp], columns = name)
+    
             for col in df.columns:
                 if df[col].isnull().values.all():
                     df.drop(axis = 1, columns = col, inplace = True)
             
             df.columns = ["index", "card_number", "expiry_date", "card_provider", "date_payment_confirmed"]
-            clean_df = pd.concat([clean_df, temp], axis=0)
+            
+            clean_df = pd.concat([clean_df, temp_df], axis = 0)
+            #clean_df.iloc[-1] = temp
             clean_df = pd.concat([clean_df, df], axis = 0)
-            #print(clean_df.head())
         
         clean_df = clean_df.iloc[2:, :]
-        clean_df.drop(axis=1, columns=clean_df.columns[-1], inplace = True)
         clean_df = clean_df.set_index("index")
         print(str((time.time() - before)) + "seconds taken")
         return clean_df
