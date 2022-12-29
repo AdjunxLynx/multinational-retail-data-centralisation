@@ -5,6 +5,7 @@ import re
 import datetime
 import numpy as np
 import sqlalchemy as sqla
+from pandasgui import show
 
 
 class DataClean():
@@ -145,14 +146,7 @@ class DataClean():
         return address
     
     def clean_card_data(self, df):
-        df.set_index(df[0], inplace=True)
-        for i in df:
-            i.set_index(i[0])
-            for index, row in i.iterrows():
-                card_number = row[1]
-                expiry_date = row[2]
-                card_provider = row[3]
-                date_payment_confirmed = row[4]
+        show(df)
            
             
                 

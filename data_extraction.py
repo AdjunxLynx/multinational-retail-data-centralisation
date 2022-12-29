@@ -4,6 +4,9 @@ import tabula
 from sqlalchemy import inspect, text
 from sqlalchemy.ext.declarative import declarative_base
 from tabula import read_pdf
+from pandasgui import show
+import numpy as np
+import time
 
 from database_utils import DatabaseConnector as DBC
 
@@ -35,20 +38,33 @@ class DataExtractor():
         return df
 
     def retrieve_pdf_data(self, link):
-        list_of_data = tabula.read_pdf(link, pages="all", lattice=True)
-        df = pd.DataFrame(
-            columns=["card_number", "expiry_date", "date_payment_confirmed"])
-
-
-        for indexed_df in list_of_data:
-            if len(indexed_df.axes[1]) == 5:
-                indexed_df.drop(columns = indexed_df.columns[0], inplace = True, axis = 1)
-                df = pd.concat([df, indexed_df], axis=0)
-            else:
-                print(indexed_df)
-                quit()
+        list_of_data = tabula.read_pdf(link, pages="all", lattice=True, guess = True)
+        clean_df = pd.DataFrame(columns = ["index", "card_number", "expiry_date", "card_provider", "date_payment_confirmed"])
+        list_of_data[0].columns = ["index", "card_number", "expiry_date", "card_provider", "date_payment_confirmed"]
+        clean_df = pd.concat([clean_df, list_of_data[0]])
+        before = time.time()
+        for i in range(1, len(list_of_data)):
+            df = list_of_data[i]
+            temp = []
+            name = ["index", "card_number", "expiry_date",
+                    "card_provider", "date_payment_confirmed"]
+            for col in df.columns:
+                if "Unnamed:" in col:
+                    pass
+                else:
+                    temp.append(col)
+            temp = pd.DataFrame(temp)
+            for col in df.columns:
+                if df[col].isnull().values.all():
+                    df.drop(axis = 1, columns = col, inplace = True)
             
-            
-         
-
-        return df
+            df.columns = ["index", "card_number", "expiry_date", "card_provider", "date_payment_confirmed"]
+            clean_df = pd.concat([clean_df, temp], axis=0)
+            clean_df = pd.concat([clean_df, df], axis = 0)
+            #print(clean_df.head())
+        
+        clean_df = clean_df.iloc[2:, :]
+        clean_df.drop(axis=1, columns=clean_df.columns[-1], inplace = True)
+        clean_df = clean_df.set_index("index")
+        print(str((time.time() - before)) + "seconds taken")
+        return clean_df
