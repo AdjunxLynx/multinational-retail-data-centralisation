@@ -140,13 +140,41 @@ class DataClean():
         except Exception as E:
             return np.nan
     def clean_address(self, address):
+        
         if address == "NULL":
             return np.nan
             print("null")
         return address
-    
+    def clean_expiry(self, expiry):
+        try:
+            date = pd.to_datetime(expiry, errors = "coerce", format = "%m/%d")
+        except Exception as E:
+            raise Exception
+    def clean_card_number(self, number):
+        try:
+            number = int(number)
+            return int(number)
+        except:
+            return np.NaN
+        
     def clean_card_data(self, df):
+        print(df.head())
+        date = []
+        number = []
+        expiry = []
+        df = df.dropna(axis = 0)
+        df.reset_index(drop = True, inplace = True)
+        for index, row in df.iterrows():
+            date.append(self.clean_date(row["date_payment_confirmed"]))
+            number.append(self.clean_card_number(row["card_number"]))
+            expiry.append(self.clean_expiry(row["expiry_date"]))
+        df["date_payment_confirmed"] = date
+        df["card_number"] = number
+        df["expiry"] = expiry
+        df["card_number"] = df["card_number"].astype(int)
         show(df)
+        
+        
            
             
                 

@@ -55,9 +55,6 @@ class DataExtractor():
                     temp.append(col)
             if len(temp) == 0:
                 temp = name
-            print(df.columns)
-            print(temp)
-
             temp_df = pd.DataFrame([temp], columns = name)
     
             for col in df.columns:
