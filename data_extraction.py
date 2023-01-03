@@ -11,6 +11,7 @@ import time
 from database_utils import DatabaseConnector as DBC
 
 
+
 class DataExtractor():
     def list_db_tables(self, engine):
         inspector = inspect(engine)
