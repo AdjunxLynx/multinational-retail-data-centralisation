@@ -53,7 +53,17 @@ class DataExtractor():
                     pass
                 else:
                     temp.append(col)
+<<<<<<< HEAD
             temp = pd.DataFrame(temp)
+=======
+            if len(temp) == 0:
+                temp = name
+            print(df.columns)
+            print(temp)
+
+            temp_df = pd.DataFrame([temp], columns = name)
+    
+>>>>>>> parent of 1f7a7c1... ex
             for col in df.columns:
                 if df[col].isnull().values.all():
                     df.drop(axis = 1, columns = col, inplace = True)
