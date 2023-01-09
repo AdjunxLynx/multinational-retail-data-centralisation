@@ -17,11 +17,11 @@ class DatabaseConnector():
             engine = sqla.create_engine(url)
             return engine
     
-    def upload_to_db(self, df, engine):
-        df.to_sql("dim_u", engine, if_exists = "replace")
+    def upload_to_db(self, df, engine, db_name):
+        df.to_sql(db_name, engine, if_exists = "replace")
         with engine.connect() as conn:
     
-            result = conn.execute(text("SELECT * FROM dim_users"))
+            result = conn.execute(text("SELECT * FROM " + db_name))
             
                 
                 
