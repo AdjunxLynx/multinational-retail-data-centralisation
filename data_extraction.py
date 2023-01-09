@@ -42,7 +42,6 @@ class DataExtractor():
         df.set_index("index")
         return df
 
-<<<<<<< HEAD
     def list_number_of_stores(self, store_endpoints, head_dict):
         response = requests.get(
             store_endpoints, headers=head_dict)
@@ -76,9 +75,7 @@ class DataExtractor():
                                 "products.csv", "product_list.csv")
                 
         
-=======
 
->>>>>>> 75a04994c3e92f6beae9b995a2403d2f85ae47c8
     def retrieve_pdf_data(self, link):
         list_of_data = tabula.read_pdf(
             link, pages="all", lattice=True, guess=True)
