@@ -15,6 +15,7 @@ import boto3
 import botocore
 
 
+
 class DataExtractor():
     def list_db_tables(self, engine):
         inspector = inspect(engine)
@@ -41,6 +42,7 @@ class DataExtractor():
         df.set_index("index")
         return df
 
+<<<<<<< HEAD
     def list_number_of_stores(self, store_endpoints, head_dict):
         response = requests.get(
             store_endpoints, headers=head_dict)
@@ -74,6 +76,9 @@ class DataExtractor():
                                 "products.csv", "product_list.csv")
                 
         
+=======
+
+>>>>>>> 75a04994c3e92f6beae9b995a2403d2f85ae47c8
     def retrieve_pdf_data(self, link):
         list_of_data = tabula.read_pdf(
             link, pages="all", lattice=True, guess=True)
@@ -97,6 +102,11 @@ class DataExtractor():
                 temp = name
             temp_df = pd.DataFrame([temp], columns=name)
 
+            print(df.columns)
+            print(temp)
+
+            temp_df = pd.DataFrame([temp], columns = name)
+    
             for col in df.columns:
                 if df[col].isnull().values.all():
                     df.drop(axis=1, columns=col, inplace=True)
