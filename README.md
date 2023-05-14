@@ -18,6 +18,6 @@ Pandas functions are then used to clean the data in numerous ways such as:
 3. ensuring the emails have a username and domain. The domain is not being checked, but could be changed to only accept values such as `gmail.com` or `hotmail.com` etc
 and other cleaning functions for the other data sources. Once cleaned, the script uploads to a new PSQL Server
 
-###database_utils.py
+### database_utils.py
 #### small module/scripts that allows easy functions to connect, upload and read data from a `PostGreSQL` server.
 The PSQL and AWS S3 bucket credentials are stored in a `.yaml` file to access the data
